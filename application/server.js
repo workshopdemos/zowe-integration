@@ -3,8 +3,10 @@ const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
 
+const secure = false;
+
 const scheme = "https";
-const host = "";
+const host = secure ? "<host>" : "<ip>";
 const port = "7554";
 
 const service1 = `${scheme}://${host}:${port}/gateway/api/v1/version`;
@@ -23,6 +25,9 @@ const service2_headers = {
 }
 
 app.get('/api/combined', async (req, res) => {
+    if (!secure) {
+        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    }
     try {
         const [res1, res2] = await Promise.all([
             axios.get(service1),
