@@ -66,6 +66,7 @@ Now for changes to take effect we need to restart SYSVIEW Application Server.</b
 We can use zowe cli console command for that, open an IDE terminal by using **Hamburger menu** -> **Terminal** -> **New Terminal** and run a zowe command there:
 
 `zowe zos-console issue command "C SYSVAPPS"`
+</br></br>
 
 ## Verify onboarding
 ### Browse the Zowe API Catalog UI once again
