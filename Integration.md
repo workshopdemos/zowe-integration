@@ -25,12 +25,12 @@ Return back to the the Strong Network platform main page, switch to the **Overvi
 
 You are in the secure cloud environment which runs VS Code and is connected to the Mainframe
 
-## Get familiar with the VSCode Activity Bar
+### Get familiar with the VSCode Activity Bar
 <img style="height: 400px" src='./assets/side-menu.png'>
 </br></br>
 
 
-### Onboard SYSVIEW to the APIML
+## Onboard SYSVIEW to the APIML
 
 Now we are gong to onboard the SYSVIEW REST API service to the APIML.
 
@@ -53,7 +53,7 @@ Input field would appear in the top part of IDE after validating the profile, pa
 
 `/u/users/cai/sysview/runtime/cnm4h00/runtime_apps/config`
 
-<img src='./assets/path-input.png'>
+<img style="height: 100px" src='./assets/path-input.png'>
 </br></br>
 
 Click on application.yml file in the USS section or the Zowe Explorer to open it.</br>
@@ -67,11 +67,22 @@ We can use zowe cli console command for that, open an IDE terminal by using **Ha
 
 `zowe zos-console issue command "C SYSVAPPS"`
 
-
+## Verify onboarding
 ### Browse the Zowe API Catalog UI once again
 
-* REST APIs verification
-    - Open Zowe API catalog
-    - Verify via snippet
-* Basic troubleshooting
+If the application was configured properly we will see the SYSVIEW tile in the API Catalog
+
+<img style="height: 100px" src='./assets/sysview-tile.png'>
+</br></br>
+
+Click on the tile to drilldown to the API documentation. You can verify the service is confiugured properly by trying out some endpoint. Select endpoint, click **Try it out**, fill in parameters if needed and click **Execute** button below
+
+<img style="height: 100px" src='./assets/sysview-endpoint.png'>
+</br></br>
+
+### Run the code snippet from IDE
+
+Now you can reach the same endpoint from the cloud IDE using curl command.</br> 
+Navigate to the IDE terminal window and paste following command there: </br></br>
+ `curl -X "GET" "https://<ip>:7554/casysview/api/v1/SYSVIEW/Display?command=status" -H "accept: application/json" -u <tso_user_id>:<tso_user_password>`
 
