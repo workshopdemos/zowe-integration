@@ -11,19 +11,28 @@
     </style>
 </head>
 <body>
-    <button onclick="fetchData()">Fetch Data</button>
-    <pre id="output">Click the button to load data...</pre>
+    <h1>API Data Fetcher</h1>
+    <button id="list-btn">Refresh</button>
 
-    <script>
-        async function fetchData() {
-            try {
-                const response = await fetch('/api/combined');
-                const data = await response.json();
-                document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
-                document.getElementById('output').textContent = "Error fetching data.";
-            }
-        }
-    </script>
+    <button id="start-btn">Start ZWEDUMMY</button>
+    <button id="stop-btn">Stop ZWEDUMMY</button>
+
+    <h2>ZWEDUMMY STCs:</h2>
+    <table id="stc-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="/app.js"></script>
 </body>
 </html>

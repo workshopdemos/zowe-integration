@@ -1,46 +1,59 @@
 const express = require('express');
-const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
+const connection = require('./connection.json');
 
-const secure = false;
-
-const scheme = "https";
-const host = secure ? "<host>" : "<ip>";
-const port = "7554";
-
-const service1 = `${scheme}://${host}:${port}/gateway/api/v1/version`;
-const service2 = `${scheme}://${host}:${port}/ibmzosmf/api/v1/zosmf/info`;
+const { authenticate } = require('./services/authService'); 
+const { sysviewCommand } = require('./services/sysview');
+const { jobsByPrefix } = require('./services/zosmf');
 
 const app = express();
 const app_port = 8080;
 
 app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Get auth token // "Authorization": "Basic ",
-const service2_headers = {
-    "X-CSRF-ZOSMF-HEADER": "",
-    "accept": "application/json"
-}
+let token = '';
 
-app.get('/api/combined', async (req, res) => {
-    if (!secure) {
+const preload = async () => {
+    if (!connection.secure) {
         process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
     }
     try {
-        const [res1, res2] = await Promise.all([
-            axios.get(service1),
-            axios.get(service2, { headers: service2_headers } )
-        ]);
-
-        // console.log('status', res2.status);
-        // console.log('headers', res2.headers);
-        // console.log('body', JSON.stringify(res2.body));
-
-        res.json({service1: res1.data, service2: res2.data});
+        token = await authenticate(connection.user, connection.password);
+        console.log(token);
     } catch (error) {
-        res.status(500).json({error: 'Failed to fetch data'});
+        console.log(error);
+    }
+};
+
+preload();
+
+app.get('/api/getList', async (req, res) => {
+    try {
+        const data = await jobsByPrefix('ZWEDUMMY', token);
+        res.json({ list: data });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/api/startSTC', async (req, res) => {
+    try {
+        const data = await sysviewCommand('/S ZWEDUMMY', token);
+        res.json({ data });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/api/stopSTC', async (req, res) => {
+    try {
+        const data = await sysviewCommand('/C ZWEDUMMY', token);
+        res.json({ data });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 

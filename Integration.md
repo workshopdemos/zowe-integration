@@ -6,12 +6,13 @@ This session is intended to describe the process of onboarding of the SYSVIEW ap
 
 ### Browse the Zowe API Catalog UI
 
-Navigate to the Strong Network platform main page and then go to the **Resourses** -> **Connected HTTP Services** 
+Navigate to the Strong Network platform main page and then go to the **Resourses** -> **Connected HTTP Services** </br>
+Click on **zowe** service to open the Zowe API Catalog UI
 
 <img style="height: 400px" src="./assets/zowe-ui-access.png">
 </br></br>
 
-Click on **zowe** service to open the Zowe API Catalog UI
+You can browse the list of currently onboarded services
 
 <img style="height: 250px" src="./assets/api-catalog.png">
 </br></br>
@@ -34,11 +35,11 @@ You are in the secure cloud environment which runs VS Code and is connected to t
 
 Now we are gong to onboard the SYSVIEW REST API service to the APIML.
 
-Let's connect to the Mainframe</br>
-IP: **<zdnt-ip>**</br>
-Host: **<host>**</br>
-User ID: **<tso_user_id>**</br>
-Password: **<tso_user_password>**
+Let's connect to the Mainframe:</br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP: **<zdnt-ip>**</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Host: **<host>**</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User ID: **<tso_user_id>**</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password: **<tso_user_password>**</br></br>
 
 There are two ways to interact with the Mainframe from this environment: you can use Zowe Explorer or tn3270 terminal emulator. 
 
@@ -52,20 +53,21 @@ Go tho the Zowe Explorer extension by selecting it on the side panel, then click
 Input field would appear in the top part of IDE after validating the profile, paste path to the SYSVAPPS configuration:
 
 `/u/users/cai/sysview/runtime/cnm4h00/runtime_apps/config`
+</br></br>
 
 <img style="height: 100px" src='./assets/path-input.png'>
 </br></br>
 
-Click on application.yml file in the USS section or the Zowe Explorer to open it.</br>
+Wait for the USS files to load and click on application.yml file in the USS section or the Zowe Explorer to open it.</br>
 Find the apiml section of configuration and update it with your mainframe host and IP details and save file.
 
 <img style="height: 130px" src='./assets/application-apiml.png'>
 </br></br>
 
-Now for changes to take effect we need to restart SYSVIEW Application Server.</br>
+Now for changes to take effect we need to start SYSVIEW Application Server.</br>
 We can use zowe cli console command for that, open an IDE terminal by using **Hamburger menu** -> **Terminal** -> **New Terminal** and run a zowe command there:
 
-`zowe zos-console issue command "C SYSVAPPS"`
+`zowe zos-console issue command "S SYSVAPPS"`
 </br></br>
 
 ## Verify onboarding
@@ -76,7 +78,7 @@ If the application was configured properly we will see the SYSVIEW tile in the A
 <img style="height: 100px" src='./assets/sysview-tile.png'>
 </br></br>
 
-Click on the tile to drilldown to the API documentation. You can verify the service is confiugured properly by trying out some endpoint. Select endpoint, click **Try it out**, fill in parameters if needed and click **Execute** button below
+Click on the tile to drilldown to the API documentation. You can verify the service is confiugured properly by trying out some endpoint.</br> Select endpoint, click **Try it out**, fill in parameters if needed and click **Execute** button below
 
 <img style="height: 100px" src='./assets/sysview-endpoint.png'>
 </br></br>
@@ -85,5 +87,5 @@ Click on the tile to drilldown to the API documentation. You can verify the serv
 
 Now you can reach the same endpoint from the cloud IDE using curl command.</br> 
 Navigate to the IDE terminal window and paste following command there: </br></br>
- `curl -X "GET" "https://<ip>:7554/casysview/api/v1/SYSVIEW/Display?command=status" -H "accept: application/json" -u <tso_user_id>:<tso_user_password>`
+ `curl -k -X "GET" "https://<ip>:7554/casysview/api/v1/SYSVIEW/Display?command=status" -H "accept: application/json" -u <tso_user_id>:<tso_user_password>`
 
