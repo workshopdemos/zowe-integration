@@ -52,8 +52,10 @@ async function watchSTC() {
             fetchStcList();
             isRunning = false;
             const response = await fetch('/api/startSTC');
-            const data = await response.json();
-            addLogMessage(`INFO:    ${data.message}`);
+            const result = await response.json();
+            if (result?.data?.context?.message) {
+                addLogMessage(`INFO:    ${result.data.context.message}`);
+            }
         } else {
             addLogMessage(`INFO:    ${active.length} active ZWEDUMMY detected, sleep for 10 seconds`);
             if (!isRunning) {

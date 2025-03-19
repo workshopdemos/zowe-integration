@@ -23,7 +23,7 @@ const preload = async () => {
     }
     try {
         token = await authenticate(connection.user, connection.password);
-        logMessagesQueue.push(`SERVER:  Authenticated`);
+        logMessagesQueue.push(`SERVER:  Authenticated as ${connection.user}`);
     } catch (error) {
         logMessagesQueue.push(`SERVER:  Failed to authenticate: ${error}`);
     }
@@ -50,7 +50,7 @@ app.get('/api/getList', async (req, res) => {
 app.get('/api/startSTC', async (req, res) => {
     logMessagesQueue.push('SERVER:  Issuing /S ZWEDUMMY command');
     try {
-        const data = await sysviewCommand('/S ZWEDUMMY', token);
+        const data = await sysviewCommand(encodeURIComponent('/S ZWEDUMMY'), token);
         res.json({ data });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -60,7 +60,7 @@ app.get('/api/startSTC', async (req, res) => {
 app.get('/api/stopSTC', async (req, res) => {
     logMessagesQueue.push('SERVER:  Issuing /C ZWEDUMMY command');
     try {
-        const data = await sysviewCommand('/C ZWEDUMMY', token);
+        const data = await sysviewCommand(encodeURIComponent('/C ZWEDUMMY'), token);
         res.json({ data });
     } catch (error) {
         res.status(500).json({ error: error.message });
