@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 let token = '';
+let logMessagesQueue = [];
 
 const preload = async () => {
     if (!connection.secure) {
@@ -30,7 +31,15 @@ const preload = async () => {
 
 preload();
 
+app.get('/api/log', (req, res) => {
+    // console.log('>>> flush', logMessagesQueue);
+    res.json({ logMessages: logMessagesQueue });
+    logMessagesQueue = [];
+});
+
+
 app.get('/api/getList', async (req, res) => {
+    logMessagesQueue.push('SERVER:  Get jobs by prefix ZWEDUMMY');
     try {
         const data = await jobsByPrefix('ZWEDUMMY', token);
         res.json({ list: data });
@@ -40,6 +49,7 @@ app.get('/api/getList', async (req, res) => {
 });
 
 app.get('/api/startSTC', async (req, res) => {
+    logMessagesQueue.push('SERVER:  Issuing /S ZWEDUMMY command');
     try {
         const data = await sysviewCommand('/S ZWEDUMMY', token);
         res.json({ data });
@@ -49,6 +59,7 @@ app.get('/api/startSTC', async (req, res) => {
 });
 
 app.get('/api/stopSTC', async (req, res) => {
+    logMessagesQueue.push('SERVER:  Issuing /C ZWEDUMMY command');
     try {
         const data = await sysviewCommand('/C ZWEDUMMY', token);
         res.json({ data });
