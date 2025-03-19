@@ -1,14 +1,10 @@
 const connection = require('../connection.json');
+const hostname = connection.secure ? connection.host : connection.ip;
 const sysviewCommand = async (command, token) => {
 
-    const fetch = require('node-fetch');
+    // Paste SYSVIEW command snippet here 
 
-    const url = `${connection.scheme}://${connection.secure ? connection.host : connection.ip}:${connection.zowePort}/casysview/api/v1/SYSVIEW/Command?command=${command}`;
 
-    let options = {method: 'GET', headers: {'Content-Type': 'application/json', 'Cookie': token}};
-
-    return fetch(url, options)
-        .then(res => res.json());
 
 };
 

@@ -1,18 +1,10 @@
 const connection = require('../connection.json');
+const hostname = connection.secure ? connection.host : connection.ip;
 const jobsByPrefix = async (prefix, token) => {
 
-    const fetch = require('node-fetch');
+    // Paste z/OSMF jobs snippet here
 
-    const url = `${connection.scheme}://${connection.secure ? connection.host : connection.ip}:${connection.zowePort}/ibmzosmf/api/v1/zosmf/restjobs/jobs?owner=*&prefix=${prefix}&max-jobs=1000&exec-data=N`;
 
-    let options = {method: 'GET', headers: {
-                "X-CSRF-ZOSMF-HEADER": "",
-                'Content-Type': 'application/json',
-                'Cookie': token
-            }};
-
-    return fetch(url, options)
-        .then(res => res.json());
 
 };
 
