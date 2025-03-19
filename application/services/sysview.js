@@ -5,7 +5,7 @@ const sysviewCommand = async (command, token) => {
 
     const encodedCommand = encodeURIComponent(command);
     const url = `${connection.scheme}://${connection.secure ? connection.host : connection.ip}:${connection.zowePort}/casysview/api/v1/SYSVIEW/Command?command=${encodedCommand}`;
-    console.log('sysviewCommand', url);
+
     const headers = {
         'Content-Type': 'application/json',
         'Cookie': token

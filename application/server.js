@@ -23,16 +23,15 @@ const preload = async () => {
     }
     try {
         token = await authenticate(connection.user, connection.password);
-        console.log(token);
+        logMessagesQueue.push(`SERVER:  Authenticated`);
     } catch (error) {
-        console.log(error);
+        logMessagesQueue.push(`SERVER:  Failed to authenticate: ${error}`);
     }
 };
 
 preload();
 
 app.get('/api/log', (req, res) => {
-    // console.log('>>> flush', logMessagesQueue);
     res.json({ logMessages: logMessagesQueue });
     logMessagesQueue = [];
 });

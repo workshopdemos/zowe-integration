@@ -1,16 +1,3 @@
-document.getElementById('list-btn').addEventListener('click', async () => {
-    fetchStcList();
-});
-
-document.getElementById('start-btn').addEventListener('click', async () => {
-    try {
-        addLogMessage(`INFO:    Start watching ZWEDUMMY`);
-        watchSTC();
-    } catch (error) {
-        console.error('Error starting STC:', error);
-    }
-});
-
 let isRunning = true;
 
 function getTimestamp() {
@@ -39,7 +26,6 @@ async function fetchStcList() {
         const response = await fetch('/api/getList');
         const data = await response.json();
         tableBody.innerHTML = '';
-        console.log('got new list', data.list);
         data.list.forEach(job => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
@@ -63,10 +49,11 @@ async function watchSTC() {
         const active = data.list.filter(job => job.status === "ACTIVE");
         if (!active.length) {
             addLogMessage('WARNING: No active ZWEDUMMY detected, restarting the STC');
+            fetchStcList();
             isRunning = false;
             const response = await fetch('/api/startSTC');
             const data = await response.json();
-            console.log(data);
+            addLogMessage(`INFO:    ${data.message}`);
         } else {
             addLogMessage(`INFO:    ${active.length} active ZWEDUMMY detected, sleep for 10 seconds`);
             if (!isRunning) {
@@ -91,5 +78,18 @@ async function fetchLogMessages() {
 }
 
 fetchLogMessages();
+
+document.getElementById('list-btn').addEventListener('click', async () => {
+    fetchStcList();
+});
+
+document.getElementById('start-btn').addEventListener('click', async () => {
+    try {
+        addLogMessage(`INFO:    Start watching ZWEDUMMY`);
+        watchSTC();
+    } catch (error) {
+        console.error('Error starting STC:', error);
+    }
+});
 
 window.onload = fetchStcList;
