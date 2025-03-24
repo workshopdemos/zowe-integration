@@ -4,7 +4,7 @@
 
 *Now that you have multiple products onboarded to Zowe’s API Mediation Layer, we are ready to build an application that utilizes them in combination. The goal is to create an app that demonstrates the power of different products like SYSVIEW and z/OSMF APIs integrated in one solution that can help you to simplify mainframe management.*
 
-*We can create a simple **ZWEDUMMY Monitor** application which will monitor jobs utilizing z/OSMF APIs and keep the ZWEDUMMY STC alive by triggering the SYSVIEW commands as needed.*
+*We will create a simple **ZWEDUMMY Monitor** application which will monitor jobs utilizing z/OSMF APIs and keep the ZWEDUMMY STC alive by triggering the SYSVIEW commands as needed.*
 
 ## Browse the Zowe API Catalog UI
 
@@ -23,9 +23,9 @@ You can browse the list of currently onboarded services
 </br></br>
 </br>
 
-*The first step is to be able to execute a SYSVIEW command from within our application. To do this, we’ll use the SYSVIEW Performance Management API, specifically the /SYSVIEW/Command endpoint, which allows us to execute SYSVIEW function commands like starting a job or querying job status.*
+*The first thing we would need for our application is to be able to execute a SYSVIEW command. To do this, we’ll use the SYSVIEW Performance Management API, specifically the /SYSVIEW/Command endpoint, which allows us to execute SYSVIEW function commands like starting a job or querying job status.*
 
-1. Click on the **SYSVIEW Performance Management** tile to drilldown to the API documentation and browse available endpoints</br>
+1. Click on the **SYSVIEW Performance Management** tile to drilldown to the API documentation</br>
 2. Browse the available endpoints, and select **/SYSVIEW/Command** 
 
 <img style="height: 150px" src='./assets/sysview-command.png'>
@@ -37,9 +37,9 @@ You can browse the list of currently onboarded services
 
 You should see the Server response code **200** and some content.</br></br> 
 
-*Once the endpoint is executed successfully, you’ll see a set of reusable code snippets in different languages. For our demo, we’ll use NodeJS. These snippets will allow us to integrate the SYSVIEW API functionality into our application.*
+*Once the endpoint is executed successfully, you’ll see a set of reusable code snippets in different languages. For our demo, we’ll use **NodeJS**. These snippets will allow us to integrate the SYSVIEW API functionality into our application.*
 
-1. Click on the NodeJS tab on snippets panel 
+1. Click on the **NodeJS** tab on snippets panel 
 2. Copy the code content.
 
 <img style="height: 250px" src='./assets/sysview-command-snippet.png'>
@@ -51,7 +51,7 @@ You should see the Server response code **200** and some content.</br></br>
 
 ### Open cloud IDE
 
-1. Return back to the the Strong Network platform main page
+1. Return to the Strong Network platform main page
 2. Switch to the **Overview** tab 
 3. Click on *Running* / *Paused* button to open your cloud IDE
 
@@ -68,7 +68,7 @@ The new window should pop-up, loading you into the secure cloud IDE.
 
 Our app is located in the **application** folder, and REST API services are stored in **services** folder.  
 
-1. Using File Explorer navigate to the **application** -> **services** folder 
+1. Using *File Explorer* navigate to the **application** -> **services** folder 
 2. Open **sysview.js**
 3. Paste the snippet code below the green commented out line. It should look similar to this:
 
@@ -94,14 +94,14 @@ Although some code snippets are ready to use, this one requires some adjustments
         .then(res => res.json());
 ```
 
-Save the file, now it should look similar to this:
+Save the file, now it should look like this:
 
 <img style="height: 300px" src='./assets/sysview-service-ready.png'>
 </br></br>
 
 ### Update z/OSMF service
 
-To unlock the actual value of API Mediation Layer we can combine multiple different products in our application. Lets use z/OSMF rest API to get the list of jobs as an example.</br>
+To unlock the actual value of API Mediation Layer we can combine multiple different products in our application. Let's use z/OSMF rest API to get the list of jobs as an example.</br>
 
 1. Navigate back to the API Catalog and switch to the z/OSMF API's documentation.
 
@@ -123,7 +123,7 @@ To unlock the actual value of API Mediation Layer we can combine multiple differ
 
 Return to the cloud IDE and repeat the steps we performed for the previous service: 
 
-1. In the File Explorer navigate to the **application** -> **services** folder 
+1. In the *File Explorer* navigate to the **application** -> **services** folder 
 2. Open our second service - **zosmf.js**</br> 
 3. Paste the snippet code below the green commented out line
 
@@ -183,8 +183,6 @@ You should be able to see our ZWEDUMMY Monitor demo application.
 <img src='./assets/zwedummy-monitor.png'>
 </br>
 
-*The application is now live. The ZWEDUMMY Monitor will monitor jobs and if a ZWEDUMMY job is not running, the app will automatically start it for you using SYSVIEW command*
-
 ### Application in details:
 
 The ZWEDUMMY is a sample STC that does nothing, just sleeps for a few minutes and then stops.
@@ -197,5 +195,7 @@ If you were quick enough, one ZWEDUMMY STC may be still running as we have issue
 
 If nothing is running, no worries, click on **Watch ZWEDUMMY** button and the app will fix that.</br>
 Every 10 seconds our app will check the list of running jobs and in case there is no ACTIVE ZWEDUMMY then it will automatically start one using SYSVIEW /S ZWEDUMMY command.
+
+*The application is now live. The ZWEDUMMY Monitor will monitor jobs and if a ZWEDUMMY job is not running, the app will automatically start it for you using SYSVIEW command*
 
 *Congratulations, you’ve now developed an application that combines the capabilities of SYSVIEW and z/OSMF APIs through the Zowe API Mediation Layer. The power of Zowe’s extensibility has made it possible for you to leverage REST APIs in ways that were previously unavailable on the mainframe.*

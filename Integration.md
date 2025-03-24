@@ -19,12 +19,12 @@ You can browse the list of currently onboarded services
 <img style="height: 250px" src="./assets/api-catalog.png">
 </br></br>
 
-*Now that you’ve seen the catalog, it’s time to switch to your development environment. You’re working in a secure cloud IDE that runs VS Code, connected directly to the mainframe. This is where you'll do all your work. It has Zowe CLI, Zowe Explorer and TN3270 terminal emulator installed and configured.*
+*Now that you’ve seen the catalog, it’s time to switch to your development environment. You’ll be working in a secure cloud IDE that runs VS Code, connected directly to the mainframe. This is where you'll do all your work. It has Zowe CLI, Zowe Explorer and TN3270 terminal emulator installed and configured.*
 
 ### Open cloud IDE
 
-1. Return back to the the Strong Network platform main page
-2. Wwitch to the **Overview** tab 
+1. Return to the Strong Network platform main page
+2. Switch to the **Overview** tab 
 3. Click on *Running* / *Paused* button
 
 <img style="height: 400px" src="./assets/sn-workspace.png">
@@ -36,7 +36,7 @@ The new window should pop-up, loading you into the secure cloud IDE.
 <img style="height: 400px" src='./assets/side-menu.png'>
 </br></br>
 
-*With the IDE set up and ready, it’s time to onboard the SYSVIEW REST API service to Zowe APIML. You’ll use Zowe Explorer to locate configuration files and modify them to point to the correct host and IP. This will enable SYSVIEW’s API to be onboarded to teh mediation layer.*
+*With the IDE set up and ready, it’s time to onboard the SYSVIEW REST API service to Zowe APIML. You’ll use Zowe Explorer to locate configuration files and modify them to point to the correct host and IP. This will enable SYSVIEW’s API to be onboarded to the mediation layer.*
 
 ## Onboard SYSVIEW to the APIML
 
@@ -49,7 +49,7 @@ Let's locate the SYSVAPPS (SYSVIEW Application Server) run-time directory using 
 ```
 
 2. Go to the *Zowe Explorer* extension by selecting it on the side panel. 
-3. Click the magnifying lens icon under USS section - zosmf profile. </br> Please nothe that first profile verification may take up to 20 seconds.
+3. Click the magnifying lens icon under USS section - zosmf profile. </br> Please note that first profile verification may take up to 20 seconds.
 
 <img style="height: 130px" src='./assets/uss.png'>
 </br></br>
@@ -90,12 +90,12 @@ zowe zos-console issue command "S SYSVAPPS"
 ### Browse the Zowe API Catalog UI once again
 
 It may take 5 to 10 minutes for the SYSVAPPS to start and register to the Discovery Service.</br>
-If the application was configured properly we will see the SYSVIEW tile in the API Catalog. 
+If the application was configured properly we will see the **SYSVIEW** tile in the API Catalog. 
 
 <img style="height: 100px" src='./assets/sysview-tile.png'>
 </br></br>
 
-Click on the tile to drilldown to the API documentation. You can verify the service is confiugured properly by trying out some endpoint.
+Click on the tile to drilldown to the API documentation. You can verify the service is configured properly by trying out some endpoint.
 
 Select endpoint, click **Try it out**, fill in parameters if needed and click **Execute** button below
 
