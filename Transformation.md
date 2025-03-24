@@ -4,6 +4,8 @@
 
 *Now that you have multiple products onboarded to Zowe’s API Mediation Layer, we are ready to build an application that utilizes them in combination. The goal is to create an app that demonstrates the power of different products like SYSVIEW and z/OSMF APIs integrated in one solution that can help you to simplify mainframe management.*
 
+*We can create a simple **ZWEDUMMY Monitor** application which will monitor jobs utilizing z/OSMF APIs and keep the ZWEDUMMY STC alive by triggering the SYSVIEW commands as needed.*
+
 ## Browse the Zowe API Catalog UI
 
 *Let's start with reviewing the Zowe API Catalog to review what services are onboarded to the Zowe APIML.*
@@ -181,15 +183,15 @@ You should be able to see our ZWEDUMMY Monitor demo application.
 <img src='./assets/zwedummy-monitor.png'>
 </br>
 
-*The application is now live. The ZWEDUMMY Monitor demo application is designed to monitor jobs and trigger SYSVIEW commands as needed. If a ZWEDUMMY job is not running, the app will automatically start it for you.*
+*The application is now live. The ZWEDUMMY Monitor will monitor jobs and if a ZWEDUMMY job is not running, the app will automatically start it for you using SYSVIEW command*
 
-### Workflow in details:
+### Application in details:
 
 The ZWEDUMMY is a sample STC that does nothing, just sleeps for a few minutes and then stops.
 
-Our application will start with authenticating the user and obtaining a token which will be used with every REST API request to connect to any product onboarded to the APIML.
+Our application will start with authenticating the user and obtaining a token which will be used with every REST API request to connect to any product onboarded to the APIML. That is implemented in **services/authService.js** and uses the same principle, connecting to the Zowe Gateway endpoint.
 
-Then it triggers the z/OSMF jobs REST API to get the list of jobs with prefix "ZWEDUMMY".
+Then the application triggers the z/OSMF jobs REST API to get the list of jobs with prefix "ZWEDUMMY".
 
 If you were quick enough, one ZWEDUMMY STC may be still running as we have issued /S ZWEDUMMY sysview command in the API Catalog earlier.
 
