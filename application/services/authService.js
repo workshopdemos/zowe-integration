@@ -1,9 +1,11 @@
 const axios = require('axios');
 const connection = require('../connection.json');
+const hostname = connection.secure ? connection.host : connection.ip;
+const gateway_url = `${connection.scheme}://${hostname}:${connection.zowePort}`;
 
 const authenticate = async (username, password) => {
 
-    const url = `${connection.scheme}://${connection.secure ? connection.host : connection.ip}:${connection.zowePort}/gateway/api/v1/auth/login`;
+    const url = `${gateway_url}/gateway/api/v1/auth/login`;
 
     try {
         const response = await axios.post(url, {
