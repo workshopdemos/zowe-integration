@@ -38,9 +38,9 @@ app.get('/api/log', (req, res) => {
 
 
 app.get('/api/getList', async (req, res) => {
-    logMessagesQueue.push('SERVER:  Get jobs by prefix ZWEDUMMY');
+    logMessagesQueue.push(`SERVER:  Get jobs by prefix Z${connection.id}DUMMY`);
     try {
-        const data = await jobsByPrefix('ZWEDUMMY', token);
+        const data = await jobsByPrefix(`Z${connection.id}DUMMY`, token);
         res.json({ list: data });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -48,9 +48,9 @@ app.get('/api/getList', async (req, res) => {
 });
 
 app.get('/api/startSTC', async (req, res) => {
-    logMessagesQueue.push('SERVER:  Issuing /S ZWEDUMMY command');
+    logMessagesQueue.push(`SERVER:  Issuing /S Z${connection.id}DUMMY command`);
     try {
-        const data = await sysviewCommand(encodeURIComponent('/S ZWEDUMMY'), token);
+        const data = await sysviewCommand(encodeURIComponent(`/S Z${connection.id}DUMMY`), token);
         res.json({ data });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -58,9 +58,9 @@ app.get('/api/startSTC', async (req, res) => {
 });
 
 app.get('/api/stopSTC', async (req, res) => {
-    logMessagesQueue.push('SERVER:  Issuing /C ZWEDUMMY command');
+   logMessagesQueue.push(`SERVER:  Issuing /C Z${connection.id}DUMMY command`);
     try {
-        const data = await sysviewCommand(encodeURIComponent('/C ZWEDUMMY'), token);
+        const data = await sysviewCommand(encodeURIComponent(`/C Z${connection.id}DUMMY`), token);
         res.json({ data });
     } catch (error) {
         res.status(500).json({ error: error.message });

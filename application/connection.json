@@ -4,6 +4,7 @@
     "ip": "<ip>",
     "zowePort": "7554",
     "user": "<tso_user_id>",
+    "id": "<id>",
     "password": "<tso_user_password>",
     "secure": <secure>
 }
