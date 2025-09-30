@@ -32,7 +32,7 @@ You can browse the list of currently onboarded services
 </br></br>
 
 3. Click **Try it out**.
-4. Enter **/S ZWEDUMMY** value to the *command* field.
+4. Enter **/S Z<id>DUMMY** value to the *command* field.
 5. Click on **Execute** button below.</br>
 
 You should see the Server response code **200** and some content.</br></br> 
@@ -110,7 +110,7 @@ To unlock the actual value of API Mediation Layer we can combine multiple differ
 
 2. Find **Jobs APIs** and open **/zosmf/restjobs/jobs** endpoint description</br>
 3. Click **Try it out** 
-4. Type down a wildcard * as an owner and **ZWEDUMMY** as a prefix 
+4. Type down a wildcard * as an owner and **Z<id>DUMMY** as a prefix 
 
 <img style="height: 300px" src='./assets/zosmf-api.png'>
 </br></br>
@@ -185,17 +185,17 @@ You should be able to see our ZWEDUMMY Monitor demo application.
 
 ### Application in details:
 
-The ZWEDUMMY is a sample STC that does nothing, just sleeps for a few minutes and then stops.
+The Z<id>DUMMY is a sample STC that does nothing, just sleeps for a few minutes and then stops.
 
 Our application will start with authenticating the user and obtaining a token which will be used with every REST API request to connect to any product onboarded to the APIML. That is implemented in **services/authService.js** and uses the same principle, connecting to the Zowe Gateway endpoint.
 
-Then the application triggers the z/OSMF jobs REST API to get the list of jobs with prefix "ZWEDUMMY".
+Then the application triggers the z/OSMF jobs REST API to get the list of jobs with prefix "Z<id>DUMMY".
 
-If you were quick enough, one ZWEDUMMY STC may be still running as we have issued /S ZWEDUMMY sysview command in the API Catalog earlier.
+If you were quick enough, one Z<id>DUMMY STC may be still running as we have issued /S Z<id>DUMMY sysview command in the API Catalog earlier.
 
 If nothing is running, no worries, click on **Watch ZWEDUMMY** button and the app will fix that.</br>
-Every 10 seconds our app will check the list of running jobs and in case there is no ACTIVE ZWEDUMMY then it will automatically start one using SYSVIEW /S ZWEDUMMY command.
+Every 10 seconds our app will check the list of running jobs and in case there is no ACTIVE Z<id>DUMMY then it will automatically start one using SYSVIEW /S Z<id>DUMMY command.
 
-*The application is now live. The ZWEDUMMY Monitor will monitor jobs and if a ZWEDUMMY job is not running, the app will automatically start it for you using SYSVIEW command*
+*The application is now live. The ZWEDUMMY Monitor will monitor jobs and if a Z<id>DUMMY job is not running, the app will automatically start it for you using SYSVIEW command*
 
 *Congratulations, you’ve now developed an application that combines the capabilities of SYSVIEW and z/OSMF APIs through the Zowe API Mediation Layer. The power of Zowe’s extensibility has made it possible for you to leverage REST APIs in ways that were previously unavailable on the mainframe.*
